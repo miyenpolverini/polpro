@@ -1,0 +1,205 @@
+/* CUERPO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background-color:wheat;}
+
+h1 {
+  margin: 30px;
+  font-weight: bold;
+  font-size: 2em;
+  color: black;
+  text-align: center;
+}
+
+h2 {
+  margin: 30px;
+}
+
+h4 {
+  color: white;
+  text-align: center;
+  background-color: darkslategray;
+  font-size: 1.5em;
+  font-weight: bold; }
+
+a{
+  text-decoration:none;
+}
+
+/* CABECERA */
+
+#pag-titulo{
+  cursor: pointer;
+}
+
+#logo-pelota{
+  width: 50px;
+}
+
+.contenido-cabecera {
+  margin: 10px 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+
+.table-total{
+    width: 150px;
+    position: fixed;}
+
+#contenido-total{
+    text-align: center;
+    width: 150px;
+  }
+
+.seleccionBox table {
+    font-weight: bolder; }
+
+   
+table, th, td {
+      border: 1px solid black;
+}
+
+.tabla-jug {
+  width: 50px; }
+
+
+.tabla-tit-total {
+    text-align: center;
+    width: 150px;
+ }
+
+#inputName{
+  margin-bottom: 10px;
+}
+
+#boxNombreEquipo{
+  margin-left: 250px;
+  font-family: 'Roboto', sans-serif;   
+}
+
+/* REGLAS */
+
+.reglas{
+  margin-top: 20px;
+  margin-left: 40px;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid black;
+  width: 40%;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+/* AVISOS */
+
+#retorno-aviso1,
+#retorno-aviso2,
+#retorno-aviso3,
+#retorno-aviso4,
+#retorno-aviso5{
+  color: red;
+  margin-left: 400px;
+  font-weight: bold;
+}
+
+/* BOTON AGREGAR */
+
+.agregar, 
+.agregar-tactica{
+  font-size: 12px;
+  text-align: center;
+}
+
+.agregar-click{
+  background-color: wheat;
+  color: black;
+}
+
+#btn1{
+  font-size: 12px;
+  text-align: center;
+  margin-left: 20px;
+}
+
+/* TABLA LATERAL DEL EQUIPO  */
+
+.tabla-tit-pos {
+  width: 10px; }
+
+.tabla-tit-jug {
+   width: 210px; }
+
+.tabla-tit-club {
+  width: 150px; }
+
+.tabla-tit-valor {
+  width: 110px; }
+
+.seleccionBox .contenido-tabla {
+  position: relative;
+  bottom: 20px;
+  right: 10px;
+  position: fixed;
+}
+
+
+
+/* TACHITO */
+
+.borrarItem img{
+  width: 15px;
+}
+
+/* CUADROS DE EQUIPOS */
+
+.tabla-tit-add{
+  width: 20px;
+}
+
+.table-jugadores {
+  cursor: pointer; 
+  width: 560px;
+  background-color: rgba(128, 128, 128, 0.1);
+  color: black;
+  margin: 20px 20px; 
+}
+
+.escudos{
+  width: 70px;
+}
+
+.seccion-equipos-tit{
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.seleccionBox {
+  margin-left: 10px;
+  margin-top: 50px;
+  padding: 5px;
+  width: 630px; 
+}
+
+.seleccionBox select {
+  width: 240px;
+  height: 30px;
+  border: 3px solid grey;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  color: #333; }
+
+.seccion-equipos{
+  margin-top: 20px;
+  border: 1px solid black;
+  background-color: darkslategray;
+}
+
+.cross{
+  text-decoration: line-through;
+}
+

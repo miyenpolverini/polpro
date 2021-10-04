@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Busqueda detallada de Jugadores">
+    <meta name="keywords" content="Ojeadores, Scouting, Fútbol, Scout, Busqueda, Jugadores, Directores técnicos">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/estilo.css">
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- animate css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Polverini Gran DT</title>
+</head>
+
+<body>
+    <header>
+        <h1 id="pag-titulo">PolPro DT</h1>
+        <img id="logo-pelota" src="img/pelota-de-futbol.png" alt="logo-pelota" style="display: none;">
+
+    </header>
+
+    <main>
+        <section>
+            <h2>ARMÁ TU EQUIPO</h2>
+        </section>
+
+        <section class="contenido-cabecera">
+            <div>
+                <input type="text" id="inputName" class="form-control" placeholder="Elija el nombre del equipo" required>
+                <label for="">Elija su táctica</label>
+                <select name="tactica" id="tactica">
+                    <option value="ta1">4-4-2</option>
+                    <option value="ta2">4-3-3</option>
+                    <option value="ta3">3-4-3</option>
+                </select>
+                <button type="submit" onclick="generarTactica()" class="btn btn-dark agregar-tactica">Mostrar</button>
+            </div>
+            <div>
+                <table class="table table-hover table-total">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th id="contenido-total"></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="reglas" style="display: none;">
+            <ul>
+                <li>Usted dispone de $30.000.000 para comprar</li>
+                <li>Debe elegir máximo 3 jugadores por club</li>
+            </ul>
+        </section>
+
+        <section class="seleccionBox">
+            <section class="contenido-tabla">
+                <div id="boxNombreEquipo"></div>
+                <div id="boxTactica"></div>
+                <div id="btnConfirmar"></div>
+            </section>
+
+            <div class="seccion-equipos">
+                <div class="seccion-equipos-tit">
+                    <h4>BOCA JUNIORS</h4>
+                    <img class="escudos" src="img/boca.png" alt="escudo-boca">
+                </div>
+                <table class="table table-hover table-jugadores">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-pos">Posiciones</th>
+                            <th scope="col" class="tabla-jug">Jugadores</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col" class="tabla-tit-add"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Arqueros</th>
+                            <td>
+                                <select id="mostrarArqBoca" onchange="agregarValor('boca','arq')">
+                                    <option value="arq0">Seleccione un arquero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorBoca1"></td>
+                            <td><button type="submit" id="selecArqueroBoca"
+                                    class="btn btn-dark btn-add-boca agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Defensores</th>
+                            <td>
+                                <select id="mostrarDefBoca" onchange="agregarValor('boca','def')">
+                                    <option value="arq0">Seleccione un defensor..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorBoca2"></td>
+                            <td><button type="submit" id="selecDefensorBoca"
+                                    class="btn btn-dark btn-add-boca agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Volantes</th>
+                            <td>
+                                <select id="mostrarVolBoca" onchange="agregarValor('boca','vol')">
+                                    <option value="arq0">Seleccione un volante..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorBoca3"></td>
+                            <td><button type="submit" id="selecVolanteBoca"
+                                    class="btn btn-dark btn-add-boca agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Delanteros</th>
+                            <td>
+                                <select id="mostrarDelBoca" onchange="agregarValor('boca','del')">
+                                    <option value="arq0">Seleccione un delantero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorBoca4"></td>
+                            <td><button type="submit" id="selecDelanteroBoca"
+                                    class="btn btn-dark btn-add-boca agregar">Agregar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="retorno-aviso1" style="display: none;">Debe seleccionar un jugador</div>
+
+            <div class="seccion-equipos">
+                <div class="seccion-equipos-tit">
+                    <h4>INDEPENDIENTE</h4>
+                    <img class="escudos" src="img/independiente.png" alt="">
+                </div>
+                <table class="table table-hover table-jugadores">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-pos">Posiciones</th>
+                            <th scope="col" class="tabla-jug">Jugadores</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col" class="tabla-tit-add"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Arqueros</th>
+                            <td>
+                                <select id="mostrarArqInd" onchange="agregarValor('independiente', 'arq')">
+                                    <option value="arq0">Seleccione un arquero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorInd1"></td>
+                            <td><button type="submit" id="selecArqueroInd"
+                                    class="btn btn-dark btn-add-ind agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Defensores</th>
+                            <td>
+                                <select id="mostrarDefInd" onchange="agregarValor('independiente', 'def')">
+                                    <option value="arq0">Seleccione un defensor..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorInd2"></td>
+                            <td><button type="submit" id="selecDefensorInd"
+                                    class="btn btn-dark btn-add-ind agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Volantes</th>
+                            <td>
+                                <select id="mostrarVolInd" onchange="agregarValor('independiente', 'vol')">
+                                    <option value="arq0">Seleccione un volante..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorInd3"></td>
+                            <td><button type="submit" id="selecVolanteInd"
+                                    class="btn btn-dark btn-add-ind agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Delanteros</th>
+                            <td>
+                                <select id="mostrarDelInd" onchange="agregarValor('independiente', 'del')">
+                                    <option value="arq0">Seleccione un delantero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorInd4"></td>
+                            <td><button type="submit" id="selecDelanteroInd"
+                                    class="btn btn-dark btn-add-ind agregar">Agregar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="retorno-aviso2" style="display: none;">Debe seleccionar un jugador</div>
+
+            <div class="seccion-equipos">
+                <div class="seccion-equipos-tit">
+                    <h4>RACING CLUB</h4>
+                    <img class="escudos" src="img/racing.svg" alt="">
+                </div>
+                <table class="table table-hover table-jugadores">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-pos">Posiciones</th>
+                            <th scope="col" class="tabla-jug">Jugadores</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col" class="tabla-tit-add"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Arqueros</th>
+                            <td>
+                                <select id="mostrarArqRac" onchange="agregarValor('racing','arq')">
+                                    <option value="arq0">Seleccione un arquero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRac1"></td>
+                            <td><button type="submit" id="selecArqueroRac"
+                                    class="btn btn-dark btn-add-rac agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Defensores</th>
+                            <td>
+                                <select id="mostrarDefRac" onchange="agregarValor('racing','def')">
+                                    <option value="arq0">Seleccione un defensor..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRac2"></td>
+                            <td><button type="submit" id="selecDefensorRac"
+                                    class="btn btn-dark btn-add-rac agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Volantes</th>
+                            <td>
+                                <select id="mostrarVolRac" onchange="agregarValor('racing','vol')">
+                                    <option value="arq0">Seleccione un volante..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRac3"></td>
+                            <td><button type="submit" id="selecVolanteRac"
+                                    class="btn btn-dark btn-add-rac agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Delanteros</th>
+                            <td>
+                                <select id="mostrarDelRac" onchange="agregarValor('racing','del')">
+                                    <option value="arq0">Seleccione un delantero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRac4"></td>
+                            <td><button type="submit" id="selecDelanteroRac"
+                                    class="btn btn-dark btn-add-rac agregar">Agregar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="retorno-aviso3" style="display: none;">Debe seleccionar un jugador</div>
+
+            <div class="seccion-equipos">
+                <div class="seccion-equipos-tit">
+                    <h4>RIVER PLATE</h4>
+                    <img class="escudos" src="img/river.png" alt="">
+                </div>
+                <table class="table table-hover table-jugadores">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-pos">Posiciones</th>
+                            <th scope="col" class="tabla-jug">Jugadores</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col" class="tabla-tit-add"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Arqueros</th>
+                            <td>
+                                <select id="mostrarArqRiv" onchange="agregarValor('river','arq')">
+                                    <option value="arq0">Seleccione un arquero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRiv1"></td>
+                            <td><button type="submit" id="selecArqueroRiv"
+                                    class="btn btn-dark btn-add-riv agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Defensores</th>
+                            <td>
+                                <select id="mostrarDefRiv" onchange="agregarValor('river','def')">
+                                    <option value="arq0">Seleccione un defensor..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRiv2"></td>
+                            <td><button type="submit" id="selecDefensorRiv"
+                                    class="btn btn-dark btn-add-riv agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Volantes</th>
+                            <td>
+                                <select id="mostrarVolRiv" onchange="agregarValor('river','vol')">
+                                    <option value="arq0">Seleccione un volante..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRiv3"></td>
+                            <td><button type="submit" id="selecVolanteRiv"
+                                    class="btn btn-dark btn-add-riv agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Delanteros</th>
+                            <td>
+                                <select id="mostrarDelRiv" onchange="agregarValor('river','del')">
+                                    <option value="arq0">Seleccione un delantero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorRiv4"></td>
+                            <td><button type="submit" id="selecDelanteroRiv"
+                                    class="btn btn-dark btn-add-riv agregar">Agregar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="retorno-aviso4" style="display: none;">Debe seleccionar un jugador</div>
+
+            <div class="seccion-equipos">
+                <div class="seccion-equipos-tit">
+                    <h4>SAN LORENZO</h4>
+                    <img class="escudos" src="img/casla.png" alt="">
+                </div>
+                <table class="table table-hover table-jugadores">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="tabla-tit-pos">Posiciones</th>
+                            <th scope="col" class="tabla-jug">Jugadores</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col" class="tabla-tit-add"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Arqueros</th>
+                            <td>
+                                <select id="mostrarArqSan" onchange="agregarValor('casla','arq')">
+                                    <option value="arq0">Seleccione un arquero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorSan1"></td>
+                            <td><button type="submit" id="selecArqueroSan"
+                                    class="btn btn-dark btn-add-san agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Defensores</th>
+                            <td>
+                                <select id="mostrarDefSan" onchange="agregarValor('casla','def')">
+                                    <option value="arq0">Seleccione un defensor..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorSan2"></td>
+                            <td><button type="submit" id="selecDefensorSan"
+                                    class="btn btn-dark btn-add-san agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Volantes</th>
+                            <td>
+                                <select id="mostrarVolSan" onchange="agregarValor('casla','vol')">
+                                    <option value="arq0">Seleccione un volante..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorSan3"></td>
+                            <td><button type="submit" id="selecVolanteSan"
+                                    class="btn btn-dark btn-add-san agregar">Agregar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Delanteros</th>
+                            <td>
+                                <select id="mostrarDelSan" onchange="agregarValor('casla','del')">
+                                    <option value="arq0">Seleccione un delantero..</option>
+                                </select>
+                            </td>
+                            <td id="boxValorSan4"></td>
+                            <td><button type="submit" id="selecDelanteroSan"
+                                    class="btn btn-dark btn-add-san agregar">Agregar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="retorno-aviso5" style="display: none;">Debe seleccionar un jugador</div>
+
+        </section>
+
+    </main>
+
+    <script src="js/datos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
