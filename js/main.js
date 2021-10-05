@@ -1581,7 +1581,7 @@ function generarTactica() {
     }
     else {
         boxTactica.replaceChild(tabla, boxTactica.firstChild);
-        $('#boxNombreEquipo').replaceChild(nombreEquipo, $('#boxNombreEquipo').firstChild);
+        $('#boxNombreEquipo').replaceWith(`<div id="boxNombreEquipo">${nombreEquipo}</div>`);
     }
 
     //SE CAMBIA DESCRIPCIÓN BOTON
