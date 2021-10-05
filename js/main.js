@@ -612,7 +612,7 @@ function crearTachito(indice) {
     //crear tachito
     let img = document.createElement('img');
     //seteo la ruta
-    img.setAttribute('src', "../entregable/img/tachito.svg");
+    img.setAttribute('src', "img/tachito.svg");
     let boxBorrar = document.getElementsByClassName('borrarItem');
     boxBorrar[indice].appendChild(img);
 }
@@ -1586,7 +1586,6 @@ function generarTactica() {
 
     //SE CAMBIA DESCRIPCIÓN BOTON
     $(".agregar-tactica").text("Cambiar");
-
 
 }
 
