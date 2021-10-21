@@ -5,6 +5,19 @@ let total = 0;
 let valorJugador = 0;
 var totalFinal;
 let nombreEquipo;
+let arqueroElegido;
+let defensor1Elegido;
+let defensor2Elegido;
+let defensor3Elegido;
+let mixto1Elegido;
+let volante1Elegido;
+let volante2Elegido;
+let volante3Elegido;
+let mixto2Elegido;
+let delanter1Elegido;
+let delantero2Elegido;
+
+
 
 //identifico los id
 let nombreArqueroBoca = document.getElementById('mostrarArqBoca');
@@ -130,7 +143,7 @@ function createArquero(equipo) {
     let boxArqueroValor = document.getElementById('boxArqueroValor');
 
     if (!boxArquero) {
-        alert("Debe primero elegir una táctica");
+        mostrarModal(2);
     }
     else {
 
@@ -160,6 +173,7 @@ function createArquero(equipo) {
 
             //creo el div
             let boxArq = document.createElement('div');
+            arqueroElegido = jugadorEncontrado.id;
             boxArq.textContent = (jugadorEncontrado.jugador);
 
             let boxArqClub = document.createElement('div');
@@ -176,21 +190,25 @@ function createArquero(equipo) {
 
             boxArqValor.textContent = ("$" + valorJugador);
 
-
             if (hayArquero === false) {
-                // appends <player> 
-                boxArquero.appendChild(boxArq);
-                boxArqueroClub.appendChild(boxArqClub);
-                boxArqueroValor.appendChild(boxArqValor);
+                //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                sumar_equipo(jugadorEncontrado.club, jugadorEncontrado.valor);
 
-                total = 0;
-                guardar_equipo(boxArq.textContent, jugadorEncontrado.valor);
-                hayArquero = true;
+                if (!noPermitido && !Superado) {
+                    // appends <player> 
+                    boxArquero.appendChild(boxArq);
+                    boxArqueroClub.appendChild(boxArqClub);
+                    boxArqueroValor.appendChild(boxArqValor);
 
-                crearTachito(0);
+                    guardar_equipo(jugadorEncontrado.id, jugadorEncontrado.jugador, jugadorEncontrado.valor);
+                    arqueroElegido = jugadorEncontrado.id;
+                    hayArquero = true;
+
+                    crearTachito(0);
+                }
             }
             else {
-                alert("Debe eliminar el arquero del equipo");
+                mostrarModal(3);
                 // replace <player> 
                 /*  boxArquero.replaceChild(boxArq, boxArquero.firstElementChild);
                  boxArqueroClub.replaceChild(boxArqClub, boxArqueroClub.firstElementChild);
@@ -244,7 +262,7 @@ function createDefensor(equipo) {
     let boxMixtoValor1 = document.getElementById('boxMixtoValor1');
 
     if (!boxDefensor1) {
-        alert("Debe primero elegir una táctica");
+        mostrarModal(2);
     }
     else {
 
@@ -291,65 +309,92 @@ function createDefensor(equipo) {
 
 
             if (hayDefensor1 === false) {
-                // appends <player> 
-                boxDefensor1.appendChild(boxDef);
-                boxDefensorClub1.appendChild(boxDefClub);
-                boxDefensorValor1.appendChild(boxDefValor);
+                //se valida si ya se eligio el jugador
+                let jug = buscar_jugador(defensorEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDef.textContent, defensorEncontrado.valor);
-                hayDefensor1 = true;
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(defensorEncontrado.club, defensorEncontrado.valor);
 
-                crearTachito(1);
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxDefensor1.appendChild(boxDef);
+                        boxDefensorClub1.appendChild(boxDefClub);
+                        boxDefensorValor1.appendChild(boxDefValor);
+
+                        guardar_equipo(defensorEncontrado.id, defensorEncontrado.jugador, defensorEncontrado.valor);
+                        defensor1Elegido = defensorEncontrado.id;
+                        hayDefensor1 = true;
+                        crearTachito(1);
+                    }
+                }
             }
             else if (hayDefensor2 === false) {
-                // appends <player> 
-                boxDefensor2.appendChild(boxDef);
-                boxDefensorClub2.appendChild(boxDefClub);
-                boxDefensorValor2.appendChild(boxDefValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(defensorEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDef.textContent, defensorEncontrado.valor);
-                hayDefensor2 = true;
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(defensorEncontrado.club, defensorEncontrado.valor);
 
-                crearTachito(2);
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxDefensor2.appendChild(boxDef);
+                        boxDefensorClub2.appendChild(boxDefClub);
+                        boxDefensorValor2.appendChild(boxDefValor);
 
+                        guardar_equipo(defensorEncontrado.id, defensorEncontrado.jugador, defensorEncontrado.valor);
+                        defensor2Elegido = defensorEncontrado.id;
+                        hayDefensor2 = true;
+                        crearTachito(2);
+                    }
+                }
             }
             else if (hayDefensor3 === false) {
-                // appends <player> 
-                boxDefensor3.appendChild(boxDef);
-                boxDefensorClub3.appendChild(boxDefClub);
-                boxDefensorValor3.appendChild(boxDefValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(defensorEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDef.textContent, defensorEncontrado.valor);
-                hayDefensor3 = true;
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(defensorEncontrado.club, defensorEncontrado.valor);
 
-                crearTachito(3);
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxDefensor3.appendChild(boxDef);
+                        boxDefensorClub3.appendChild(boxDefClub);
+                        boxDefensorValor3.appendChild(boxDefValor);
 
+                        guardar_equipo(defensorEncontrado.id, defensorEncontrado.jugador, defensorEncontrado.valor);
+                        defensor3Elegido = defensorEncontrado.id;
+                        hayDefensor3 = true;
+                        crearTachito(3);
+                    }
+                }
             }
             else if (hayMixto1 === false) {
-                // appends <player> 
-                boxMixto1.appendChild(boxDef);
-                boxMixtoClub1.appendChild(boxDefClub);
-                boxMixtoValor1.appendChild(boxDefValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(defensorEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDef.textContent, defensorEncontrado.valor);
-                hayMixto1 = true;
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(defensorEncontrado.club, defensorEncontrado.valor);
 
-                crearTachito(4);
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxMixto1.appendChild(boxDef);
+                        boxMixtoClub1.appendChild(boxDefClub);
+                        boxMixtoValor1.appendChild(boxDefValor);
 
+                        guardar_equipo(defensorEncontrado.id, defensorEncontrado.jugador, defensorEncontrado.valor);
+                        mixto1Elegido = defensorEncontrado.id;
+                        hayMixto1 = true;
+
+                        crearTachito(4);
+                    }
+                }
             }
             else {
-                alert("Debe eliminar un defensor del equipo");
-                // replace <player> 
-                /*  boxDefensor1.replaceChild(boxDef, boxDefensor1.firstElementChild);
-                 boxDefensorClub1.replaceChild(boxDefClub, boxDefensorClub1.firstElementChild);
-                 boxDefensorValor1.replaceChild(boxDefValor, boxDefensorValor1.firstElementChild);
-                 localStorage.removeItem('equipoElegido');
-                 total = 0;
-                 guardar_equipo(boxDef.textContent, defensorEncontrado.valor); */
+                mostrarModal(4);
             }
         }
     }
@@ -380,7 +425,7 @@ function createVolante(equipo) {
     let boxVolanteValor1 = document.getElementById('boxVolanteValor1');
 
     if (!boxVolante1) {
-        alert("Debe primero elegir una táctica");
+        mostrarModal(2);
     }
     else {
 
@@ -427,74 +472,91 @@ function createVolante(equipo) {
 
 
             if (hayVolante1 === false) {
-                // appends <player> 
-                boxVolante1.appendChild(boxVol);
-                boxVolanteClub1.appendChild(boxVolClub);
-                boxVolanteValor1.appendChild(boxVolValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(volanteEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxVol.textContent, volanteEncontrado.valor);
-                hayVolante1 = true;
-                //modificar luego
-                crearTachito(5);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(volanteEncontrado.club, volanteEncontrado.valor);
+
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxVolante1.appendChild(boxVol);
+                        boxVolanteClub1.appendChild(boxVolClub);
+                        boxVolanteValor1.appendChild(boxVolValor);
+
+                        guardar_equipo(volanteEncontrado.id, volanteEncontrado.jugador, volanteEncontrado.valor);
+                        volante1Elegido = volanteEncontrado.id;
+                        hayVolante1 = true;
+                        crearTachito(5);
+                    }
+                }
             }
             else if (hayVolante2 === false) {
-                // appends <player> 
-                boxVolante2.appendChild(boxVol);
-                boxVolanteClub2.appendChild(boxVolClub);
-                boxVolanteValor2.appendChild(boxVolValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(volanteEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxVol.textContent, volanteEncontrado.valor);
-                hayVolante2 = true;
-                //modificar luego
-                crearTachito(6);
-            }
-            else if (hayVolante2 === false) {
-                // appends <player> 
-                boxVolante2.appendChild(boxVol);
-                boxVolanteClub2.appendChild(boxVolClub);
-                boxVolanteValor2.appendChild(boxVolValor);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(volanteEncontrado.club, volanteEncontrado.valor);
 
-                total = 0;
-                guardar_equipo(boxVol.textContent, volanteEncontrado.valor);
-                hayVolante2 = true;
-                //modificar luego
-                crearTachito(6);
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxVolante2.appendChild(boxVol);
+                        boxVolanteClub2.appendChild(boxVolClub);
+                        boxVolanteValor2.appendChild(boxVolValor);
+
+                        guardar_equipo(volanteEncontrado.id, volanteEncontrado.jugador, volanteEncontrado.valor);
+                        volante2Elegido = volanteEncontrado.id;
+                        hayVolante2 = true;
+                        crearTachito(6);
+                    }
+                }
             }
             else if (hayVolante3 === false) {
-                // appends <player> 
-                boxVolante3.appendChild(boxVol);
-                boxVolanteClub3.appendChild(boxVolClub);
-                boxVolanteValor3.appendChild(boxVolValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(volanteEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxVol.textContent, volanteEncontrado.valor);
-                hayVolante3 = true;
-                //modificar luego
-                crearTachito(7);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(volanteEncontrado.club, volanteEncontrado.valor);
+
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxVolante3.appendChild(boxVol);
+                        boxVolanteClub3.appendChild(boxVolClub);
+                        boxVolanteValor3.appendChild(boxVolValor);
+
+                        guardar_equipo(volanteEncontrado.id, volanteEncontrado.jugador, volanteEncontrado.valor);
+                        volante3Elegido = volanteEncontrado.id;
+                        hayVolante3 = true;
+                        crearTachito(7);
+                    }
+                }
             }
             else if (hayMixto2 === false) {
-                // appends <player> 
-                boxMixto2.appendChild(boxVol);
-                boxMixtoClub2.appendChild(boxVolClub);
-                boxMixtoValor2.appendChild(boxVolValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(volanteEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxVol.textContent, volanteEncontrado.valor);
-                hayMixto2 = true;
-                //modificar luego
-                crearTachito(8);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(volanteEncontrado.club, volanteEncontrado.valor);
+
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxMixto2.appendChild(boxVol);
+                        boxMixtoClub2.appendChild(boxVolClub);
+                        boxMixtoValor2.appendChild(boxVolValor);
+
+                        guardar_equipo(volanteEncontrado.id, volanteEncontrado.jugador, volanteEncontrado.valor);
+                        mixto2Elegido = volanteEncontrado.id;
+                        hayMixto2 = true;
+                        crearTachito(8);
+                    }
+                }
             }
             else {
-                alert("Debe eliminar un volante del equipo");
-                // replace <player> 
-                /*  boxVolante1.replaceChild(boxVol, boxVolante1.firstElementChild);
-                 boxVolanteClub1.replaceChild(boxVolClub, boxVolanteClub1.firstElementChild);
-                 boxVolanteValor1.replaceChild(boxVolValor, boxVolanteValor1.firstElementChild);
-                 localStorage.removeItem('equipoElegido');
-                 total = 0;
-                 guardar_equipo(boxVol.textContent, volanteEncontrado.valor); */
+                mostrarModal(5);
             }
         }
     }
@@ -523,7 +585,7 @@ function createDelantero(equipo) {
     let boxDelanteroValor1 = document.getElementById('boxDelanteroValor1');
 
     if (!boxDelantero1) {
-        alert("Debe primero elegir una táctica");
+        mostrarModal(2);
     }
     else {
 
@@ -570,38 +632,51 @@ function createDelantero(equipo) {
 
 
             if (hayDelantero1 === false) {
-                // appends <player> 
-                boxDelantero1.appendChild(boxDel);
-                boxDelanteroClub1.appendChild(boxDelClub);
-                boxDelanteroValor1.appendChild(boxDelValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(delanteroEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDel.textContent, delanteroEncontrado.valor);
-                hayDelantero1 = true;
-                //modificar luego
-                crearTachito(9);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(delanteroEncontrado.club, delanteroEncontrado.valor);
+
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxDelantero1.appendChild(boxDel);
+                        boxDelanteroClub1.appendChild(boxDelClub);
+                        boxDelanteroValor1.appendChild(boxDelValor);
+
+                        guardar_equipo(delanteroEncontrado.id, delanteroEncontrado.jugador, delanteroEncontrado.valor);
+                        delantero1Elegido = delanteroEncontrado.id;
+                        hayDelantero1 = true;
+                        //modificar luego
+                        crearTachito(9);
+                    }
+                }
             }
             else if (hayDelantero2 === false) {
-                // appends <player> 
-                boxDelantero2.appendChild(boxDel);
-                boxDelanteroClub2.appendChild(boxDelClub);
-                boxDelanteroValor2.appendChild(boxDelValor);
+                // se valida si ya se eligio el jugador
+                let jug = buscar_jugador(delanteroEncontrado.id);
 
-                total = 0;
-                guardar_equipo(boxDel.textContent, delanteroEncontrado.valor);
-                hayDelantero2 = true;
-                //modificar luego
-                crearTachito(10);
+                if (jug === false) {
+                    //SE VALIDA MAXIMO 3 POR EQUIPO Y MAX 50 MILL PERMITIDO
+                    sumar_equipo(delanteroEncontrado.club, delanteroEncontrado.valor);
+
+                    if (!noPermitido && !Superado) {
+                        // appends <player> 
+                        boxDelantero2.appendChild(boxDel);
+                        boxDelanteroClub2.appendChild(boxDelClub);
+                        boxDelanteroValor2.appendChild(boxDelValor);
+
+                        guardar_equipo(delanteroEncontrado.id, delanteroEncontrado.jugador, delanteroEncontrado.valor);
+                        delantero2Elegido = delanteroEncontrado.id;
+                        hayDelantero2 = true;
+                        //modificar luego
+                        crearTachito(10);
+                    }
+                }
             }
             else {
-                alert("Debe eliminar un delantero del equipo");
-                // replace <player> 
-                /*  boxDelantero1.replaceChild(boxDel, boxDelantero1.firstElementChild);
-                 boxDelanteroClub1.replaceChild(boxDelClub, boxDelanteroClub1.firstElementChild);
-                 boxDelanteroValor1.replaceChild(boxDelValor, boxDelanteroValor1.firstElementChild);
-                 localStorage.removeItem('equipoElegido');
-                 total = 0;
-                 guardar_equipo(boxDel.textContent, delanteroEncontrado.valor); */
+                mostrarModal(6);
             }
         }
     }
@@ -618,101 +693,158 @@ function crearTachito(indice) {
 }
 
 //BORRAR ITEM DESDE EL TACHITO
-
 function borrarItem(indice) {
 
-
-    let itemAborrar = localStorage.getItem("equipoElegido"[1]);
-
-    console.log(itemAborrar);
+    let aBorrar;
+    let equipoAlmacenado = JSON.parse(localStorage.getItem("equipoElegido"));
 
     switch (indice) {
         case 0:
+            aBorrar = document.getElementById('boxArqueroClub').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxArquero').empty();
             $('#boxArqueroClub').empty();
             $('#boxArqueroValor').empty();
             $('.borrarItem:eq(0)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != arqueroElegido);
             hayArquero = false;
             break;
         case 1:
+            aBorrar = document.getElementById('boxDefensorClub1').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxDefensor1').empty();
             $('#boxDefensorClub1').empty();
             $('#boxDefensorValor1').empty();
             $('.borrarItem:eq(1)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != defensor1Elegido);
             hayDefensor1 = false;
             break;
         case 2:
+            aBorrar = document.getElementById('boxDefensorClub2').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxDefensor2').empty();
             $('#boxDefensorClub2').empty();
             $('#boxDefensorValor2').empty();
             $('.borrarItem:eq(2)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != defensor2Elegido);
             hayDefensor2 = false;
             break;
         case 3:
+            aBorrar = document.getElementById('boxDefensorClub3').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxDefensor3').empty();
             $('#boxDefensorClub3').empty();
             $('#boxDefensorValor3').empty();
             $('.borrarItem:eq(3)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != defensor3Elegido);
             hayDefensor3 = false;
             break;
         case 4:
+            aBorrar = document.getElementById('boxMixtoClub1').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxMixto1').empty();
             $('#boxMixtoClub1').empty();
             $('#boxMixtoValor1').empty();
             $('.borrarItem:eq(4)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != mixto1Elegido);
             hayMixto1 = false;
             break;
         case 5:
+            aBorrar = document.getElementById('boxVolanteClub1').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxVolante1').empty();
             $('#boxVolanteClub1').empty();
             $('#boxVolanteValor1').empty();
             $('.borrarItem:eq(5)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != volante1Elegido);
             hayVolante1 = false;
             break;
         case 6:
+            aBorrar = document.getElementById('boxVolanteClub2').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxVolante2').empty();
             $('#boxVolanteClub2').empty();
             $('#boxVolanteValor2').empty();
             $('.borrarItem:eq(6)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != volante2Elegido);
             hayVolante2 = false;
             break;
         case 7:
+            aBorrar = document.getElementById('boxVolanteClub3').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxVolante3').empty();
             $('#boxVolanteClub3').empty();
             $('#boxVolanteValor3').empty();
             $('.borrarItem:eq(7)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != volante3Elegido);
             hayVolante3 = false;
             break;
         case 8:
+            aBorrar = document.getElementById('boxMixtoClub2').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxMixto2').empty();
             $('#boxMixtoClub2').empty();
             $('#boxMixtoValor2').empty();
             $('.borrarItem:eq(8)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != mixto2Elegido);
             hayMixto2 = false;
             break;
         case 9:
+            aBorrar = document.getElementById('boxDelanteroClub1').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxDelantero1').empty();
             $('#boxDelanteroClub1').empty();
             $('#boxDelanteroValor1').empty();
             $('.borrarItem:eq(9)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != delantero1Elegido);
             hayDelantero1 = false;
             break;
         case 10:
+            aBorrar = document.getElementById('boxDelanteroClub2').textContent.toLowerCase();
+            restar_equipo(aBorrar);
             $('#boxDelantero2').empty();
             $('#boxDelanteroClub2').empty();
             $('#boxDelanteroValor2').empty();
             $('.borrarItem:eq(10)').empty();
+            equipoAlmacenado = equipoAlmacenado.filter(element => element.id != delantero2Elegido);
             hayDelantero2 = false;
             break;
     }
 
-    localStorage.removeItem("equipoElegido");
+    let almacenados_string = JSON.stringify(equipoAlmacenado);
+    localStorage.setItem("equipoElegido", almacenados_string);
 
-
-    if (indice == 0) {
-        mostrarTotIni();
+    //INHABILITO EL BOTÓN CONFIRMAR
+    if (equipoAlmacenado.length !== 11) {
+        document.getElementById("btn1").disabled = true;
     }
 
+    total = 0;
+    //CALCULAR TOTAL
+    for (let i = 0; i < equipoAlmacenado.length; i++) {
+        let objeto_jugador = equipoAlmacenado[i];
+        total = total + (parseInt(objeto_jugador.valor));
+    }
+
+    if (total === 0) {
+        mostrarTotIni();
+    }
+    else {
+        //FORMATEO NUMERO PARA MOSTRAR POR PANTALLA
+        totalFinal = total.toString();
+        if (totalFinal.length === 6) {
+            totalFinal = totalFinal.slice(0, 3) + "." + totalFinal.slice(3, 6);
+        }
+        else if (totalFinal.length === 7) {
+            totalFinal = totalFinal.slice(0, 1) + "." + totalFinal.slice(1, 4) + "." + totalFinal.slice(4, 7);
+        }
+        else {
+            totalFinal = totalFinal.slice(0, 2) + "." + totalFinal.slice(2, 5) + "." + totalFinal.slice(5, 8);
+        }
+
+        $("#contenido-total").replaceWith(`<th id="contenido-total"><div>$${totalFinal}
+    </div></th>`);
+    }
 }
 
 //SECCIÓN MOSTRAR JUGADORES DEL ARRAY
@@ -996,667 +1128,195 @@ function agregarValor(equipo, posicion) {
 }
 
 
-//SECCIÓN MOSTRAR TACTICA
-
-let hayTabla = false;
-
-function generarTactica() {
-
-    mostrarTotIni();
-
-    hayArquero = false;
-    hayDefensor1 = false;
-    hayDefensor2 = false;
-    hayDefensor3 = false;
-    hayMixto1 = false;
-    //Obtengo id de indicador de tactica
-    let paramTactica = document.getElementById('tactica').value;
-
-    // Crea un elemento <table> y un elemento <tbody>
-    var tabla = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-
-    // Crea las celdas
-    for (var i = 0; i < 12; i++) {
-        // CREA LAS FILAS DE LA TABLA
-        var hilera = document.createElement("tr");
-
-        if (i == 0) {
-
-
-            var titulo = document.createElement("th");
-            var tituloCelda = document.createTextNode("Pos");
-            titulo.classList.add("tabla-tit-pos");
-            titulo.classList.add("table-dark");
-            titulo.appendChild(tituloCelda);
-            hilera.appendChild(titulo);
-
-            var titulo = document.createElement("th");
-            var tituloCelda = document.createTextNode("Jugadores");
-            titulo.classList.add("tabla-tit-jug");
-            titulo.classList.add("table-dark");
-            titulo.appendChild(tituloCelda);
-            hilera.appendChild(titulo);
-
-            var titulo = document.createElement("th");
-            var tituloCelda = document.createTextNode("Club");
-            titulo.classList.add("tabla-tit-club");
-            titulo.classList.add("table-dark");
-            titulo.appendChild(tituloCelda);
-            hilera.appendChild(titulo);
-
-            var titulo = document.createElement("th");
-            var tituloCelda = document.createTextNode("Valor");
-            titulo.classList.add("tabla-tit-valor");
-            titulo.classList.add("table-dark");
-            titulo.appendChild(tituloCelda);
-            hilera.appendChild(titulo);
-
-
-        }
-        else if (i == 1) {
-
-            for (var j = 0; j < 5; j++) {
-
-                // CREA LA FILA 1 COLUMNA 1 DE LA TABLA
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("ARQ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                // CREA LA FILA 1 COLUMNA 2 DE LA TABLA
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxArquero");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxArqueroClub");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxArqueroValor");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(0)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-            }
-        }
-
-        else if (i == 2) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("DEF");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensor1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 2) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorClub1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorValor1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(1)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-        else if (i == 3) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("DEF");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensor2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 2) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorClub2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorValor2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(2)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-        }
-        else if (i == 4) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("DEF");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensor3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorClub3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDefensorValor3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(3)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-        else if (i == 5) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    if (paramTactica == "ta3") {
-                        var textoCelda = document.createTextNode("VOL");
-                    }
-                    else {
-                        var textoCelda = document.createTextNode("DEF");
-                    }
-
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixto1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixtoClub1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixtoValor1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(4)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-        }
-        else if (i == 6) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("VOL");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolante1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteClub1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteValor1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(5)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-        }
-        else if (i == 7) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("VOL");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolante2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteClub2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteValor2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(6)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-        else if (i == 8) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("VOL");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolante3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteClub3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxVolanteValor3");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(7)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-        else if (i == 9) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    if (paramTactica == "ta1") {
-                        var textoCelda = document.createTextNode("VOL");
-                    }
-                    else {
-                        var textoCelda = document.createTextNode("DEL");
-                    }
-
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixto2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixtoClub2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxMixtoValor2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(8)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-        else if (i == 10) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("DEL");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelantero1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelanteroClub1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelanteroValor1");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(9)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-        }
-        else if (i == 11) {
-            for (var j = 0; j < 5; j++) {
-
-                if (j == 0) {
-                    var celda = document.createElement("td");
-                    var textoCelda = document.createTextNode("DEL");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-
-                }
-                else if (j == 1) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelantero2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 2) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelanteroClub2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else if (j == 3) {
-                    var celda = document.createElement("td");
-                    celda.id = ("boxDelanteroValor2");
-                    var textoCelda = document.createTextNode(" ");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-                else {
-                    var celda = document.createElement("div");
-                    celda.className = ("borrarItem");
-                    celda.setAttribute('onclick', 'borrarItem(10)');
-                    var textoCelda = document.createTextNode("");
-                    celda.appendChild(textoCelda);
-                    hilera.appendChild(celda);
-                }
-            }
-
-
-        }
-
-
-        // agrega la hilera al final de la tabla (al final del elemento tblbody)
-        tblBody.appendChild(hilera);
+//BUSCAR JUGADOR
+function buscar_jugador(id) {
+
+    if (!localStorage.getItem("equipoElegido")) {
+        return false;
     }
 
-    // posiciona el <tbody> debajo del elemento <table>
-    tabla.appendChild(tblBody);
+    let almacenados = JSON.parse(localStorage.getItem("equipoElegido"));
 
-    // agrego estilo a la tabla
-    tabla.classList.add("table");
-    tabla.classList.add("table-hover");
-    tabla.classList.add("table-jugadores");
+    let encontrado = false;
+    let i = 0;
+    while (!encontrado && i != almacenados.length) {
 
-    nombreEquipo = document.getElementById('inputName').value.toUpperCase();
-    
-    // Obtener la referencia de la ubicación de la tabla
-    var boxTactica = document.getElementById('boxTactica');
+        if (almacenados[i].id == id) {
 
-    if (!nombreEquipo){
-        alert("Debe elegir el nombre del equipo");
+            encontrado = almacenados[i];
+        }
+        i++;
     }
-    else if (hayTabla === false) {
-        // appends <table> 
-        boxTactica.appendChild(tabla);
-        hayTabla = true;
-        btnConfirmar();
-        $('.reglas').slideDown();
-        $('#boxNombreEquipo').append(nombreEquipo);
-    }
-    else {
-        boxTactica.replaceChild(tabla, boxTactica.firstChild);
-        $('#boxNombreEquipo').replaceWith(`<div id="boxNombreEquipo">${nombreEquipo}</div>`);
-    }
-
-    //SE CAMBIA DESCRIPCIÓN BOTON
-    $(".agregar-tactica").text("Cambiar");
+    return encontrado;
 
 }
 
+let cantJugBoca = 0;
+let cantJugInd = 0;
+let cantJugRac = 0;
+let cantJugRiv = 0;
+let cantJugSan = 0;
+let noPermitido;
+let Superado;
+
+//VALIDAR CANTIDAD EQUIPO
+function sumar_equipo(equipo, valor) {
+
+    Superado = false;
+    noPermitido = false;
+
+    if (total + parseInt(valor) > 50000000) {
+        mostrarModal(10);
+        Superado = true;
+    }
+    else {
+        switch (equipo) {
+            case "boca juniors":
+                if (cantJugBoca >= 3) {
+                    mostrarModal(9);
+                    noPermitido = true;
+                }
+                else {
+                    cantJugBoca++;
+                }
+                break;
+            case "independiente":
+                if (cantJugInd >= 3) {
+                    mostrarModal(9);
+                    noPermitido = true;
+                }
+                else {
+                    cantJugInd++;
+                }
+                break;
+            case "racing club":
+                if (cantJugRac >= 3) {
+                    mostrarModal(9);
+                    noPermitido = true;
+                }
+                else {
+                    cantJugRac++;
+                }
+                break;
+            case "river plate":
+                if (cantJugRiv >= 3) {
+                    mostrarModal(9);
+                    noPermitido = true;
+                }
+                else {
+                    cantJugRiv++;
+                }
+                break;
+            case "san lorenzo":
+                if (cantJugSan >= 3) {
+                    mostrarModal(9);
+                    noPermitido = true;
+                }
+                else {
+                    cantJugSan++;
+                }
+                break;
+        }
+    }
+
+}
+
+//RESTAR CANTIDAD EQUIPO
+function restar_equipo(equipo) {
+
+    if (equipo === "boca juniors" || equipo === " boca juniors") {
+        cantJugBoca--;
+    }
+    else if (equipo === "independiente" || equipo === " independiente") {
+        cantJugInd--;
+    }
+    else if (equipo === "racing club" || equipo === " racing club") {
+        cantJugRac--;
+    }
+    else if (equipo === "river plate" || equipo === " river plate") {
+        cantJugRiv--;
+    }
+    else if (equipo === "san lorenzo" || equipo === " san lorenzo") {
+        cantJugSan--;
+    }
+
+}
+
+
+
 //GUARDAR EQUIPO
 
-function guardar_equipo(jugador_nuevo, jugador_valor) {
+function guardar_equipo(id_jugador, jugador_nuevo, jugador_valor) {
 
     let item = localStorage.getItem("equipoElegido");
 
     if (item) {
 
-        let jugador = new Jugador_elegido(jugador_nuevo, jugador_valor);
+        let jugador = new Jugador_elegido(id_jugador, jugador_nuevo, jugador_valor);
 
         let almacenados = JSON.parse(localStorage.getItem("equipoElegido"));
         almacenados.push(jugador);
+
+        //HABILITO EL BOTÓN CONFIRMAR
+        if (almacenados.length === 11) {
+            document.getElementById("btn1").disabled = false;
+        }
 
         let almacenados_string = JSON.stringify(almacenados);
         localStorage.setItem("equipoElegido", almacenados_string);
 
         //CALCULAR TOTAL
+        total = 0;
         for (let i = 0; i < almacenados.length; i++) {
             let objeto_jugador = almacenados[i];
             total = total + (parseInt(objeto_jugador.valor));
-
-            //FORMATEO NUMERO PARA MOSTRAR POR PANTALLA
-            totalFinal = total.toString();
-            if (totalFinal.length === 6) {
-                totalFinal = totalFinal.slice(0, 3) + "." + totalFinal.slice(3, 6);
-            }
-            else if (totalFinal.length === 7) {
-                totalFinal = totalFinal.slice(0, 1) + "." + totalFinal.slice(1, 4) + "." + totalFinal.slice(4, 7);
-            }
-            else {
-                totalFinal = totalFinal.slice(0, 2) + "." + totalFinal.slice(2, 5) + "." + totalFinal.slice(5, 8);
-            }
-
-            $("#contenido-total").replaceWith(`<th id="contenido-total"><div>$${totalFinal}
-        </div></th>`);
-
         }
+
+        //FORMATEO NUMERO PARA MOSTRAR POR PANTALLA
+        totalFinal = total.toString();
+        if (totalFinal.length === 6) {
+            totalFinal = totalFinal.slice(0, 3) + "." + totalFinal.slice(3, 6);
+        }
+        else if (totalFinal.length === 7) {
+            totalFinal = totalFinal.slice(0, 1) + "." + totalFinal.slice(1, 4) + "." + totalFinal.slice(4, 7);
+        }
+        else {
+            totalFinal = totalFinal.slice(0, 2) + "." + totalFinal.slice(2, 5) + "." + totalFinal.slice(5, 8);
+        }
+
+        $("#contenido-total").replaceWith(`<th id="contenido-total"><div>$${totalFinal}
+        </div></th>`);
 
     }
     else {
 
-        let jugador = new Jugador_elegido(jugador_nuevo, jugador_valor);
+        let jugador = new Jugador_elegido(id_jugador, jugador_nuevo, jugador_valor);
         let almacenados = new Array();
         almacenados.push(jugador);
         let almacenados_string = JSON.stringify(almacenados);
         localStorage.setItem("equipoElegido", almacenados_string);
 
-        console.log(jugador);
-
 
         //CALCULAR TOTAL
+        total = 0;
         for (let i = 0; i < almacenados.length; i++) {
             let objeto_jugador = almacenados[i];
             total = total + (parseInt(objeto_jugador.valor));
+        }
 
-            //FORMATEO NUMERO PARA MOSTRAR POR PANTALLA
-            totalFinal = total.toString();
-            if (totalFinal.length === 6) {
-                totalFinal = totalFinal.slice(0, 3) + "." + totalFinal.slice(3, 6);
-            }
-            else {
-                totalFinal = totalFinal.slice(0, 1) + "." + totalFinal.slice(1, 4) + "." + totalFinal.slice(4, 7);
-            }
+        //FORMATEO NUMERO PARA MOSTRAR POR PANTALLA
+        totalFinal = total.toString();
+        if (totalFinal.length === 6) {
+            totalFinal = totalFinal.slice(0, 3) + "." + totalFinal.slice(3, 6);
+        }
+        else {
+            totalFinal = totalFinal.slice(0, 1) + "." + totalFinal.slice(1, 4) + "." + totalFinal.slice(4, 7);
+        }
 
-            $("#contenido-total").replaceWith(`<th id="contenido-total"><div>$${totalFinal}
+        $("#contenido-total").replaceWith(`<th id="contenido-total"><div>$${totalFinal}
         </div></th>`);
 
-        }
+
 
     }
 }
@@ -1736,7 +1396,7 @@ function ocultarAviso(equipo) {
 
 }
 
-//MOSTRAR TOTAL
+//MOSTRAR TOTAL INICIAL
 
 let mostrarTot = false;
 
@@ -1759,7 +1419,7 @@ $('#pag-titulo').on('click', () => {
 
     $("#pag-titulo").fadeOut("slow", function () {
 
-        $("#logo-pelota").show(1000)
+        $("#logo-pelota").fadeIn(1000)
             .css({
                 'position': 'relative',
                 'left': '610px',
@@ -1780,11 +1440,67 @@ $('#logo-pelota').on('click', () => {
     })
 })
 
+//MODAL
+
+function mostrarModal(param) {
+    switch (param) {
+        case 1:
+            $('#descError').append(`Debe seleccionar una táctica`);
+            break;
+        case 2:
+            $('#descError').append(`Debe elegir el nombre del equipo`);
+            break;
+        case 3:
+            $('#descError').append(`Debe eliminar el arquero`);
+            break;
+        case 4:
+            $('#descError').append(`Debe eliminar un defensor`);
+            break;
+        case 5:
+            $('#descError').append(`Debe eliminar un volante`);
+            break;
+        case 6:
+            $('#descError').append(`Debe eliminar un delantero`);
+            break;
+        case 7:
+            $('#descError').append(`Debe completar el equipo con 11 jugadores`);
+            break;
+        case 8:
+            $('#descError').append(`El equipo ${nombreEquipo} ya está participando. Exitos!`);
+            break;
+        case 9:
+            $('#descError').append(`Puede elegir máximo 3 jugadores por equipo`);
+            break;
+        case 10:
+            $('#descError').append(`Ha superado el límite de compra de $50.000.000`);
+            break;
+    }
+
+    var modal = document.getElementById("myModal");
+    modal.style.display = "block";
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+        modal.style.display = "none";
+        $('#descError').replaceWith(`<p id="descError"></p>`);
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            $('#descError').replaceWith(`<p id="descError"></p>`);
+        }
+    }
+}
+
 
 //AJAX
 function btnConfirmar() {
     // appends 
-    $('#btnConfirmar').append('<button type="submit" class="btn btn-dark" id="btn1">Confirmar</button>');
+    $('#btnConfirmar').append(`<button type="submit" class="btn btn-dark" id="btn1" ><a href="#pag-titulo">Confirmar</a></button>`);
+
+    //INHABILITO EL BOTÓN CONFIRMAR
+    document.getElementById("btn1").disabled = true;
 
     const URLGET = "https://jsonplaceholder.typicode.com/posts"
 
@@ -1792,27 +1508,104 @@ function btnConfirmar() {
 
         let equipoCompleto = JSON.parse(localStorage.getItem("equipoElegido"));
 
-        if (equipoCompleto === null || equipoCompleto.length !== 11) {
-            alert("Debe completar el equipo con 11 jugadores");
-        }
-        else {
+        let confirmar = confirm("¿Desea confirmar el equipo?");
 
-            let confirmar = confirm("¿Desea confirmar el equipo?");
+        const infoPost = equipoCompleto;
 
-            const infoPost =  equipoCompleto;
+        if (confirmar) {
+            $(".spinner:eq(1)").fadeIn();
+            setTimeout(mostrarDibujoEquipo, 3000);
 
-            if (confirmar) {
-                $.post(URLGET, infoPost, (respuesta, estado) => {
-                    if (estado === "success") {
-                        alert("Usted ya está participando. Exitos!");
-                    }
-                });
-            }
+            $.post(URLGET, infoPost, (respuesta, estado) => {
+                if (estado === "success") {
+                    mostrarModal(8);
+                }
+            });
+
         }
     });
 
 }
 
+function mostrarDibujoEquipo() {
+    $(".spinner:eq(1)").hide();
+    $(".reglas").hide();
+    $(".seleccionBox").hide();
+    $(".contenido-cabecera").hide();
+    $("#img-portada").show();
+    $("#players").show();
+    $(".table-total").css({
+        'position': 'absolute',
+    })
+
+    let boxPlayer1 = document.getElementById('arquero');
+    let namePlayer1 = document.getElementById('boxArquero').textContent;
+    let player1 = document.createElement('div');
+    player1.textContent = namePlayer1;
+    boxPlayer1.appendChild(player1);
+
+    let boxPlayer2 = document.getElementById('defensor1');
+    let namePlayer2 = document.getElementById('boxDefensor1').textContent;
+    let player2 = document.createElement('div');
+    player2.textContent = namePlayer2;
+    boxPlayer2.appendChild(player2);
+
+    let boxPlayer3 = document.getElementById('defensor2');
+    let namePlayer3 = document.getElementById('boxDefensor2').textContent;
+    let player3 = document.createElement('div');
+    player3.textContent = namePlayer3;
+    boxPlayer3.appendChild(player3);
+
+    let boxPlayer4 = document.getElementById('defensor3');
+    let namePlayer4 = document.getElementById('boxDefensor3').textContent;
+    let player4 = document.createElement('div');
+    player4.textContent = namePlayer4;
+    boxPlayer4.appendChild(player4);
+
+    let boxPlayer5 = document.getElementById('defensor4');
+    let namePlayer5 = document.getElementById('boxMixto1').textContent;
+    let player5 = document.createElement('div');
+    player5.textContent = namePlayer5;
+    boxPlayer5.appendChild(player5);
+
+    let boxPlayer6 = document.getElementById('volante1');
+    let namePlayer6 = document.getElementById('boxVolante1').textContent;
+    let player6 = document.createElement('div');
+    player6.textContent = namePlayer6;
+    boxPlayer6.appendChild(player6);
+
+    let boxPlayer7 = document.getElementById('volante2');
+    let namePlayer7 = document.getElementById('boxVolante2').textContent;
+    let player7 = document.createElement('div');
+    player7.textContent = namePlayer7;
+    boxPlayer7.appendChild(player7);
+
+    let boxPlayer8 = document.getElementById('volante3');
+    let namePlayer8 = document.getElementById('boxVolante3').textContent;
+    let player8 = document.createElement('div');
+    player8.textContent = namePlayer8;
+    boxPlayer8.appendChild(player8);
+
+    let boxPlayer9 = document.getElementById('volante4');
+    let namePlayer9 = document.getElementById('boxMixto2').textContent;
+    let player9 = document.createElement('div');
+    player9.textContent = namePlayer9;
+    boxPlayer9.appendChild(player9);
+
+    let boxPlayer10 = document.getElementById('delantero1');
+    let namePlayer10 = document.getElementById('boxDelantero1').textContent;
+    let player10 = document.createElement('div');
+    player10.textContent = namePlayer10;
+    boxPlayer10.appendChild(player10);
+
+    let boxPlayer11 = document.getElementById('delantero2');
+    let namePlayer11 = document.getElementById('boxDelantero2').textContent;
+    let player11 = document.createElement('div');
+    player11.textContent = namePlayer11;
+    boxPlayer11.appendChild(player11);
+
+
+}
 
 
 

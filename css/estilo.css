@@ -21,7 +21,8 @@ h2 {
 
 h4 {
   color: white;
-  text-align: center;
+  margin-left: 10px;
+  width: 50%;
   background-color: darkslategray;
   font-size: 1.5em;
   font-weight: bold; }
@@ -38,17 +39,22 @@ a{
 
 #logo-pelota{
   width: 50px;
+  margin-bottom: 50px;
 }
 
 .contenido-cabecera {
-  margin: 10px 200px;
+  margin: 50px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
+}
 
+.crear{
+  display:flex;
+ 
+}
 
 .table-total{
     width: 150px;
+    margin-left: 600px;
     position: fixed;}
 
 #contenido-total{
@@ -75,11 +81,118 @@ table, th, td {
 
 #inputName{
   margin-bottom: 10px;
+  width: 220px;
 }
 
 #boxNombreEquipo{
-  margin-left: 250px;
+  width: 220px;
+  margin-left: 20px;
   font-family: 'Roboto', sans-serif;   
+  color: white;
+  background-color: #212529;
+}
+
+/* IMAGEN PORTADA */
+#img-portada{
+  width: 70%;
+  display: block;
+  margin: auto;
+}
+
+/* IMAGEN PLAYER */
+.arquero{
+  font-size: 30px;
+  position: relative;
+  bottom: 320px;
+  left: 225px;
+  z-index: 1;
+}
+
+#arquero,
+#defensor1,
+#defensor2,
+#defensor3,
+#defensor4,
+#volante1,
+#volante2,
+#volante3,
+#volante4,
+#delantero1,
+#delantero2{
+  font-size: 15px;
+  color: white;
+  font-weight: bold;
+}
+
+.defensor1{
+  font-size: 30px;
+  position: relative;
+  bottom: 200px;
+  left: 500px;
+  z-index: 1;
+}
+.defensor2{
+  font-size: 30px;
+  position: relative;
+  bottom: 400px;
+  left: 400px;
+  z-index: 1;
+}
+.defensor3{
+  font-size: 30px;
+  position: relative;
+  bottom: 680px;
+  left: 400px;
+  z-index: 1;
+}
+.defensor4{
+  font-size: 30px;
+  position: relative;
+  bottom: 850px;
+  left: 500px;
+  z-index: 1;
+}
+.volante1{
+  font-size: 30px;
+  position: relative;
+  bottom: 600px;
+  left: 700px;
+  z-index: 1;
+}
+.volante2{
+  font-size: 30px;
+  position: relative;
+  bottom: 820px;
+  left: 550px;
+  z-index: 1;
+}
+.volante3{
+  font-size: 30px;
+  position: relative;
+  bottom: 1020px;
+  left: 700px;
+  z-index: 1;
+}
+.volante4{
+  font-size: 30px;
+  position: relative;
+  bottom: 980px;
+  left: 800px;
+  z-index: 1;
+}
+.delantero1{
+  font-size: 30px;
+  position: relative;
+  bottom: 980px;
+  left: 920px;
+  z-index: 1;
+}
+.delantero2{
+  font-size: 30px;
+  position: relative;
+  bottom: 1220px;
+  left: 920px;
+  z-index: 1;
 }
 
 /* REGLAS */
@@ -110,6 +223,7 @@ table, th, td {
 
 .agregar, 
 .agregar-tactica{
+  margin-left: 10px;
   font-size: 12px;
   text-align: center;
 }
@@ -123,6 +237,10 @@ table, th, td {
   font-size: 12px;
   text-align: center;
   margin-left: 20px;
+}
+
+#btn1 a{
+  color: white;
 }
 
 /* TABLA LATERAL DEL EQUIPO  */
@@ -141,7 +259,7 @@ table, th, td {
 
 .seleccionBox .contenido-tabla {
   position: relative;
-  bottom: 20px;
+  top: 280px;
   right: 10px;
   position: fixed;
 }
@@ -202,4 +320,70 @@ table, th, td {
 .cross{
   text-decoration: line-through;
 }
+
+/* POPUP */
+
+/* Modal Content */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  position: relative;
+  top: 250px;
+  margin: auto;
+  border: 5px solid wheat;
+  width: 30%;
+}
+
+.close {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  background-color: darkslategray;
+  color: white;
+  padding: 5px;
+  height: 120px;
+  display:inline-block;
+  text-align: center;
+
+}
+
+/* SPINNER */
+.spinner{
+  color: white;
+  font-weight: bolder;
+  position: relative;
+  top: 360px;
+  text-align: center;
+  z-index: 1;
+}
+
+.logoSpin{
+  width: 50px;
+  height: 50px;
+}
+
+.spin2{
+  color: black;
+}
+
+
+
 

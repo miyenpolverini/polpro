@@ -122,7 +122,8 @@ arreglo.push(arquero1);
 
 
 class Jugador_elegido {
-  constructor(jugador, valor){
+  constructor(id, jugador, valor){
+    this.id = id;
     this.jugador = jugador;
     this.valor = valor;
   }
